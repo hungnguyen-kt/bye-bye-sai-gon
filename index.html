@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+    }
+
+    .time-display {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .time-unit {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 15px 10px;
+      border-radius: 10px;
+      color: white;
+    }
+
+    .time-value {
+      font-size: 2em;
+      font-weight: bold;
+      display: block;
+    }
+
+    .time-label {
+      font-size: 0.8em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+
+    .total-seconds {
+      font-size: 1em;
+      color: #666;
+      margin: 15px 0;
+    }
+
+    /* Tablet and larger */
+    @media (min-width: 768px) {
+      .container {
+        padding: 40px;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+      }
+
+      .time-display {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin: 30px 0;
+      }
+
+      .time-unit {
+        padding: 20px;
+      }
+
+      .time-value {
+        font-size: 2.5em;
+      }
+
+      .time-label {
+        font-size: 0.9em;
+      }
+
+      .total-seconds {
+        font-size: 1.2em;
+        margin: 20px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>⏱️ Countdown to May 15, 2026</h1>
+
+    <div class="time-display">
+      <div class="time-unit">
+        <span class="time-value" id="days">0</span>
+        <span class="time-label">Days</span>
+      </div>
+      <div class="time-unit">
+        <span class="time-value" id="hours">0</span>
+        <span class="time-label">Hours</span>
+      </div>
+      <div class="time-unit">
+        <span class="time-value" id="minutes">0</span>
+        <span class="time-label">Minutes</span>
+      </div>
+      <div class="time-unit">
+        <span class="time-value" id="seconds">0</span>
+        <span class="time-label">Seconds</span>
+      </div>
+    </div>
+
+    <div class="total-seconds">
+      Total: <strong><span id="totalSeconds">0</span></strong> seconds remaining
+    </div>
+
+
+  </div>
+
+  <script>
+    const endDate = new Date('2026-05-15T23:59:59');
+
+    function calculateRemainingSeconds() {
+      const now = new Date();
+      const diff = endDate - now;
+      return Math.max(0, Math.floor(diff / 1000));
+    }
+
+    function updateDisplay() {
+      const remainingSeconds = calculateRemainingSeconds();
+      const days = Math.floor(remainingSeconds / 86400);
+      const hours = Math.floor((remainingSeconds % 86400) / 3600);
+      const minutes = Math.floor((remainingSeconds % 3600) / 60);
+      const seconds = remainingSeconds % 60;
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      document.getElementById('totalSeconds').textContent = remainingSeconds.toLocaleString();
+
+      if (remainingSeconds === 0) {
+        alert('Countdown finished! It\'s May 15, 2026!');
+      }
+    }
+
+    // Initialize and auto-start
+    updateDisplay();
+    setInterval(updateDisplay, 1000);
+  </script>
+</body>
+
+</html>
