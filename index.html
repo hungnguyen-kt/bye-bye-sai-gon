@@ -8,100 +8,211 @@
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      padding: 10px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.2) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      33% {
+        transform: translate(30px, -30px) rotate(120deg);
+      }
+
+      66% {
+        transform: translate(-20px, 20px) rotate(240deg);
+      }
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 30px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
       text-align: center;
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
-      color: #333;
-      margin-bottom: 20px;
-      font-size: 1.5em;
-    }
-
-    .time-display {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin: 20px 0;
-    }
-
-    .time-unit {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 15px 10px;
-      border-radius: 10px;
-      color: white;
-    }
-
-    .time-value {
-      font-size: 2em;
-      font-weight: bold;
-      display: block;
-    }
-
-    .time-label {
-      font-size: 0.8em;
+      color: #fff;
+      margin-bottom: 40px;
+      font-size: 1.4em;
+      font-weight: 300;
+      letter-spacing: 2px;
       text-transform: uppercase;
       opacity: 0.9;
-      margin-top: 5px;
+    }
+
+    .countdown-main {
+      margin: 30px 0;
     }
 
     .total-seconds {
+      font-size: 4em;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      text-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+      animation: pulse 2s ease-in-out infinite;
+      line-height: 1.2;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.02);
+        opacity: 0.95;
+      }
+    }
+
+    .seconds-label {
       font-size: 1em;
-      color: #666;
-      margin: 15px 0;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 300;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      margin: 30px 0;
+    }
+
+    .breakdown {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .time-block {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 20px 15px;
+      transition: all 0.3s ease;
+    }
+
+    .time-block:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
+    }
+
+    .time-value {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      margin-bottom: 5px;
+      text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+    }
+
+    .time-label {
+      font-size: 0.75em;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 400;
+    }
+
+    .target-date {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 1px;
     }
 
     /* Tablet and larger */
     @media (min-width: 768px) {
       .container {
-        padding: 40px;
+        padding: 60px 50px;
+        max-width: 700px;
       }
 
       h1 {
-        font-size: 2em;
-        margin-bottom: 30px;
-      }
-
-      .time-display {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-        margin: 30px 0;
-      }
-
-      .time-unit {
-        padding: 20px;
-      }
-
-      .time-value {
-        font-size: 2.5em;
-      }
-
-      .time-label {
-        font-size: 0.9em;
+        font-size: 1.8em;
+        margin-bottom: 50px;
       }
 
       .total-seconds {
-        font-size: 1.2em;
-        margin: 20px 0;
+        font-size: 6em;
+        margin-bottom: 15px;
+      }
+
+      .seconds-label {
+        font-size: 1.1em;
+      }
+
+      .breakdown {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .time-block {
+        padding: 25px 20px;
+      }
+
+      .time-value {
+        font-size: 3em;
+      }
+
+      .time-label {
+        font-size: 0.8em;
+      }
+
+      .target-date {
+        font-size: 1em;
+        margin-top: 40px;
+      }
+    }
+
+    /* Small mobile optimization */
+    @media (max-width: 400px) {
+      .total-seconds {
+        font-size: 3em;
+      }
+
+      .time-value {
+        font-size: 2em;
       }
     }
   </style>
@@ -109,32 +220,35 @@
 
 <body>
   <div class="container">
-    <h1>⏱️ Countdown to May 15, 2026</h1>
+    <h1>⏳ Countdown Timer</h1>
 
-    <div class="time-display">
-      <div class="time-unit">
+    <div class="countdown-main">
+      <div class="total-seconds" id="totalSeconds">0</div>
+      <div class="seconds-label">Seconds Remaining</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="breakdown">
+      <div class="time-block">
         <span class="time-value" id="days">0</span>
         <span class="time-label">Days</span>
       </div>
-      <div class="time-unit">
+      <div class="time-block">
         <span class="time-value" id="hours">0</span>
         <span class="time-label">Hours</span>
       </div>
-      <div class="time-unit">
+      <div class="time-block">
         <span class="time-value" id="minutes">0</span>
         <span class="time-label">Minutes</span>
       </div>
-      <div class="time-unit">
+      <div class="time-block">
         <span class="time-value" id="seconds">0</span>
         <span class="time-label">Seconds</span>
       </div>
     </div>
 
-    <div class="total-seconds">
-      Total: <strong><span id="totalSeconds">0</span></strong> seconds remaining
-    </div>
-
-
+    <div class="target-date">Until Friday, May 15, 2026</div>
   </div>
 
   <script>
@@ -153,18 +267,17 @@
       const minutes = Math.floor((remainingSeconds % 3600) / 60);
       const seconds = remainingSeconds % 60;
 
+      document.getElementById('totalSeconds').textContent = remainingSeconds.toLocaleString();
       document.getElementById('days').textContent = days;
       document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
       document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
       document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-      document.getElementById('totalSeconds').textContent = remainingSeconds.toLocaleString();
 
       if (remainingSeconds === 0) {
         alert('Countdown finished! It\'s May 15, 2026!');
       }
     }
 
-    // Initialize and auto-start
     updateDisplay();
     setInterval(updateDisplay, 1000);
   </script>
