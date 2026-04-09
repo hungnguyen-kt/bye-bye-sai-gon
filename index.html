@@ -270,13 +270,13 @@
       </div>
     </div>
 
-    <div class="target-date">Until Friday, May 15, 2026</div>
+    <div class="target-date">Until Web, July 01, 2026</div>
 
     <div class="fullscreen-hint">Press <kbd>F</kbd> for fullscreen</div>
   </div>
 
   <script>
-    const endDate = new Date('2026-05-15T23:59:59');
+    const endDate = new Date('2026-07-01T23:59:59');
 
     function calculateRemainingSeconds() {
       const now = new Date();
@@ -298,7 +298,7 @@
       document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
 
       if (remainingSeconds === 0) {
-        alert('Countdown finished! It\'s May 15, 2026!');
+        alert('Countdown finished! It\'s July 01, 2026!');
       }
     }
 
